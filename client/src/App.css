@@ -1,21 +1,37 @@
 .container {
   text-align: center;
 }
+/* $primary: #79c7c5;
+$secondary: #a1e2d9;
+$white: #f9fbff;
+$dark: #777777; */
 
 input {
   border: 0;
-  border-bottom: 1px solid black;
-  height: 20px;
-  width: 400px;
+  border: 1px solid #79c7c5;
+  height: 40px;
+  width: 500px;
   outline: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  margin-top: 20px;
+  font-size: 15px;
+  background-color: #79c7c5;
 }
 
+.bot:before {
+  border-radius: 100%;
+  content: "B";
+  background: #f1562c;
+  color: #fff;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  padding: 8px;
+  margin-right: 10px;
+  width: 11px;
+}
 .bot {
-  background-color: rgb(141, 27, 27);
-  color: white;
+  background: linear-gradient(45deg, #f19696, #f3b8b8);
+  color: black;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   border-radius: 10px;
   text-align: left;
@@ -23,20 +39,35 @@ input {
   padding: 4px;
   padding-left: 20px;
   max-width: 300px;
+  padding-right: 20px;
+  margin-left: 5px;
 }
 
+.user:after {
+  border-radius: 100%;
+  content: "U";
+  background: #16726d;
+  color: #fff;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  padding: 8px;
+  margin-left: 10px;
+  width: 11px;
+}
 .user {
-  background-color: rgb(55, 119, 133);
+  background: linear-gradient(45deg, #79c7c5, #3c8684);
   color: white;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   border-radius: 10px;
   text-align: right;
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 4px;
   padding-right: 20px;
+  padding-left: 20px;
   max-width: 300px;
   margin-left: auto;
-  margin-right: 0;
+  margin-right: 5px;
 }
 
 .chat {
@@ -44,8 +75,10 @@ input {
   max-width: 600px;
 }
 .historyContainer {
-  height: 400px;
-  overflow: scroll;
+  height: 550px;
+  width: 500px;
+  overflow-y: scroll;
+  background: #ceece8;
 }
 h1 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

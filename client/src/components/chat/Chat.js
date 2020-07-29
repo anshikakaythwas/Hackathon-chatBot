@@ -86,7 +86,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
 
   return (
     <div className="chat">
-      <h1>Chatty the Chatbot</h1>
+      <h1>Chatbot for Preferences</h1>
       {/* Handle Messages */}
       <div class="historyContainer">
         {chat.length === 0
@@ -100,6 +100,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
         onChange={(e) => setMessage(e.target.value)}
         onKeyPress={handleClick}
         value={message}
+        placeholder="Type something..."
       ></input>
     </div>
   );
