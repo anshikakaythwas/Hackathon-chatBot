@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
 //  Import action
 import { userMessage, sendMessage } from "../../actions/watson";
@@ -23,19 +24,45 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
     );
   };
 
+  const updatePreference = (message) => {
+    console.log("inside updatePreference", message);
+    const body = { input: message };
+    axios
+      .post(
+        "http://localhost:8080/CPWECompletion/servlet/PreferenceTreeHandler2",
+        null,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            nodeName: message.nodeName,
+            updateValue: message.updateValue,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const sendRequestToUpdate = (value) => {
     var message = null;
     var regex = /^([Setting ])*([a-zA-Z]*)[\s](to)[\s]([a-zA-Z]*)$/;
-    message = value.message.replace(regex, '{"key": "$2", "value": "$4"}');
-    // message.key = value.message.sub;
-    console.log(message);
+    message = value.message.replace(
+      regex,
+      '{"key": "$2", "updateValue": "$4"}'
+    );
     message = JSON.parse(message);
-    message.nodeValue = nodeValues[message.key];
-    if (message.nodeValue) {
+    message.nodeName = nodeValues[message.key] + "/" + message.key;
+
+    if (message.nodeName) {
+      updatePreference(message);
       console.log("sending POST request");
+      // updatePreference(message);
     }
-    console.log(message);
-    console.log("Send POST request to update the preference");
+    //console.log(message);
+    //console.log("Send POST request to update the preference");
   };
   useEffect(scrollToBottom, [chat]);
 
