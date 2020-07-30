@@ -10,11 +10,13 @@ input {
   border: 0;
   border: 1px solid #79c7c5;
   height: 40px;
-  width: 500px;
+  width: 490px;
   outline: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   background-color: #79c7c5;
+  padding-left: 10px;
+  border-radius: 5px;
 }
 
 .bot:before {

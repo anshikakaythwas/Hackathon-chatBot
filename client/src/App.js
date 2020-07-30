@@ -26,10 +26,10 @@ if (localStorage.session) {
 const App = () => {
   useEffect(() => {
     // Check if there session
-    if (!localStorage.session) {
-      // Create
-      store.dispatch(createSession());
-    }
+    //   if (!localStorage.session) {
+    // Create
+    store.dispatch(createSession());
+    // }
   });
   return (
     <Provider store={store}>

@@ -16,11 +16,20 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
     endOfMessages.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  const checkMessage = (value) => {
+  const isPreferenceUpdate = (value) => {
     return (
       value &&
       value.type == "bot" &&
       /^[Setting]*[a-zA-Z ]*[to][a-zA-Z ]*$/.test(value.message) == true
+    );
+  };
+
+  const isHelperMessage = (value) => {
+    return (
+      value &&
+      value.type == "bot" &&
+      (value.message.toString().startsWith("Redirecting to") == true ||
+        value.message.toString().includes("documentation") == true)
     );
   };
 
@@ -43,9 +52,26 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("update preference error: " + error);
       });
   };
+  const sendRequestToRedirect = (value) => {
+    var messages = value.message ? value.message.split(" ") : [];
+    var target = messages.length > 0 ? messages[messages.length - 1] : null;
+    var urlToRedirect;
+
+    if (messages.includes("jira")) {
+      urlToRedirect = "https://jira.ncr.com/browse/" + target;
+    } else if (messages.includes("documentation")) {
+      urlToRedirect =
+        "https://confluence.ncr.com/pages/viewpage.action?spaceKey=pp&title=Passport+" +
+        target +
+        ".0+-+IE+Documentation";
+    }
+    console.log("Redirecting to URL: ", urlToRedirect);
+    window.open(urlToRedirect, "_blank");
+  };
+
   const sendRequestToUpdate = (value) => {
     var message = null;
     var regex = /^([Setting ])*([a-zA-Z]*)[\s](to)[\s]([a-zA-Z]*)$/;
@@ -58,17 +84,15 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
 
     if (message.nodeName) {
       updatePreference(message);
-      console.log("sending POST request");
-      // updatePreference(message);
     }
-    //console.log(message);
-    //console.log("Send POST request to update the preference");
   };
   useEffect(scrollToBottom, [chat]);
 
   useEffect(() => {
-    if (checkMessage(chat[chat.length - 1])) {
+    if (isPreferenceUpdate(chat[chat.length - 1])) {
       sendRequestToUpdate(chat[chat.length - 1]);
+    } else if (isHelperMessage(chat[chat.length - 1])) {
+      sendRequestToRedirect(chat[chat.length - 1]);
     }
   }, [chat]);
 
