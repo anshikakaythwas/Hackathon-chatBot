@@ -21,7 +21,7 @@ input {
 
 .bot:before {
   border-radius: 100%;
-  content: "B";
+  content: "A";
   background: #f1562c;
   color: #fff;
   border: none;
@@ -77,7 +77,7 @@ input {
   max-width: 600px;
 }
 .historyContainer {
-  height: 550px;
+  height: 500px;
   width: 500px;
   overflow-y: scroll;
   background: #ceece8;

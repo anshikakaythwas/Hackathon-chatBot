@@ -60,7 +60,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
     var target = messages.length > 0 ? messages[messages.length - 1] : null;
     var urlToRedirect;
 
-    if (messages.includes("jira")) {
+    if (messages.includes("JIRA") || messages.includes("jira")) {
       urlToRedirect = "https://jira.ncr.com/browse/" + target;
     } else if (messages.includes("documentation")) {
       urlToRedirect =
@@ -110,7 +110,7 @@ const Chat = ({ chat, userMessage, sendMessage }) => {
 
   return (
     <div className="chat">
-      <h1>Chatbot for Preferences</h1>
+      <h1>Passport Assistant</h1>
       {/* Handle Messages */}
       <div class="historyContainer">
         {chat.length === 0
